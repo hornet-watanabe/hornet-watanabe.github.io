@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      p {
+          padding: 0;
+          margin: 0;
+      }
+
+      h1, h2 {
+          font-weight: 600;
+          text-align: center;
+          margin: 0;
+      }
+
+      h1 {
+          font-size: 16pt;
+      }
+
+      h2 {
+          font-size: 14pt;
+      }
+
+      .a4 {
+          padding: 48px;
+          width: 794px; /* 210mm x 3.78 */
+          height: 1123px; /* 297mm x 3.78 */
+          margin: auto;
+          font-family: "Hiragino Sans";
+      }
+
+      @media print {
+          .a4 {
+              width: 100%;
+              height: auto;
+              page-break-after: always;
+          }
+      }
+
+      .profile-container {
+          background-color: #f2f2f2;
+          margin: 16px auto;
+          padding: 8px;
+          display: flex;
+          flex-direction: column;
+          /*justify-content: space-between;*/
+      }
+
+      .information-section {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          margin-bottom: 8px;
+          position: relative;
+          padding-bottom: 1px; /* Adjust this value as needed to ensure the line touches the text */
+
+      }
+
+      .information-section.underline {
+          border-bottom: 1px solid #CCCCCC;
+          border-bottom-color: transparent;
+      }
+
+      .information-section dt.title:first-child {
+          margin-left: 12px;
+      }
+
+      /* Adjust the underline */
+      .information-section.underline::after {
+          content: '';
+          display: block;
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          border-bottom: 1px solid #CCCCCC;
+      }
+
+      .information-section > div {
+          display: flex; /* Display elements side by side */
+      }
+
+      .information-section > div > dl {
+          margin-right: 8px; /* Right margin for spacing between elements */
+          display: flex; /* Ensure the elements inside dl are flex containers */
+          align-items: center; /* Center the content vertically */
+      }
+
+      /* Ensure the last element does not have extra margin */
+      .information-section > div > dl:last-child {
+          margin-right: 0;
+      }
+
+      dl {
+          display: flex;
+          align-items: flex-start; /* Align items to the top */
+          margin: 0;
+          padding: 0;
+          flex: 1;
+      }
+
+      dt.title, dt.section {
+          margin-right: 8px;
+          flex-shrink: 0;
+          font-size: 7pt;
+          font-weight: bold;
+          white-space: nowrap;
+      }
+
+      dt.condition {
+          border-left: 5px;
+          padding-left: 10px;
+          font-size: 10pt;
+          font-weight: 400;
+      }
+
+      dt.condition::before {
+          content: "";
+          display: inline-block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: -7px;
+          width: 5px;
+          height: 100%;
+          border-radius: 5px;
+          background: gray;
+      }
+
+      dd.content {
+          margin: 0 8px; /* Left and right margin set to 8px */
+          display: flex;
+          font-size: 8pt;
+          flex-wrap: wrap; /* Allow content to wrap */
+      }
+
+      dd.name, dd.age, dd.gender {
+          font-size: 10pt;
+          font-weight: 600;
+      }
+
+      dd.age, dt.gender {
+          margin-right: 4px; /* 右の余白を調整 */
+      }
+
+      .right-bordered-age {
+          position: relative; /* 疑似要素の基準となる */
+          padding-right: 16px; /* 線とテキストの間の余白 */
+      }
+
+      .right-bordered-age::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          border-right: 1px solid #ccc; /* 縦線 */
+          /* 下線と縦線の間の調整が必要な場合はここでmarginやpaddingを調整する */
+      }
+
+      .left-bordered-age {
+          position: relative; /* 疑似要素の基準となる */
+          padding-left: 16px; /* 線とテキストの間の余白 */
+      }
+
+      .left-bordered-age::before {
+          content: '';
+          position: absolute;
+          top: -3px;
+          left: 0;
+          bottom: -3px; /* 下線に合わせて調整 */
+          border-left: 1px solid #ccc; /* 縦線 */
+      }
+
+      /* 共通テーブルスタイル */
+      table {
+          border-collapse: collapse;
+          font-size: 8pt;
+          width: 794px;
+          border: 1px solid #ccc;
+          text-align: left;
+      }
+
+      th, td {
+          padding: 4px 8px;
+          border: 1px solid #ccc;
+      }
+
+      th {
+          background-color: #f2f2f2;
+      }
+
+      /* テーブルコンテナのスタイル */
+      .table-container {
+          margin-top: 24px;
+          display: flex;
+          justify-content: space-between;
+          width: 794px;
+      }
+
+      .table-container table {
+          width: 48%; /* 2つのテーブル間に2%の間隔を設ける */
+      }
+
+      /* テーブルヘッダーのスタイル */
+      .table-container th {
+          background-color: #f2f2f2;
+      }
+
+  </style>
+</head>
+<body class="a4">
+
+<h1>スキルサマリ</h1>
+<div class="profile-container">
+  <!-- 基本情報セクション -->
+  <div class="information-section underline">
+    <div>
+      <dl>
+        <dt class="title name">名前</dt>
+        <dd class="content name">渡邉優太</dd>
+      </dl>
+    </div>
+    <div>
+      <dl>
+        <dt class="title age left-bordered-age">年齢</dt>
+        <dd class="content age right-bordered-age">33</dd> <!-- 新しいクラス 'bordered-age' を追加 -->
+      </dl>
+      <dl>
+        <dt class="title gender">性別</dt>
+        <dd class="content gender">男性</dd>
+      </dl>
+    </div>
+  </div>
+  <div class="information-section">
+    <dl>
+      <dt class="title" style="padding-top: 2px">住所</dt>
+      <dd class="content">埼玉県さいたま市桜区西堀 6-5-186-5-186-5-186-5-18</dd>
+    </dl>
+    <dl>
+      <dt class="title" style="padding-top: 2px; margin-left: 8px;">最寄駅</dt>
+      <dd class="content">JR埼京線 中浦和駅</dd>
+    </dl>
+    <dl>
+      <dt class="title" style="padding-top: 2px; margin-left: 8px;">学歴</dt>
+      <dd class="content">東京大学</dd>
+    </dl>
+  </div>
+  <!-- 自己PRセクション -->
+  <div class="information-section">
+    <dl>
+      <dt class="title">自己PR</dt>
+    </dl>
+  </div>
+  <div class="information-section">
+    <dl>
+      <dd class="content" style="height: 60px; margin-left: 12px;">自己PRの内容</dd>
+    </dl>
+  </div>
+  <!-- 希望条件セクション -->
+  <div class="information-section">
+    <dl>
+      <dt class="section condition">希望条件</dt>
+    </dl>
+  </div>
+  <div class="information-section underline">
+    <dl>
+      <dt class="title" style="padding-top: 2px; font-size: 9pt; width: 150px;">希望時間</dt>
+      <dd class="content" style="font-size: 9pt;">09:00 - 19:00</dd>
+    </dl>
+    <dl>
+      <dd class="content" style="font-size: 9pt;">内4 - 8時間希望</dd>
+    </dl>
+  </div>
+  <div class="information-section underline">
+    <dl>
+      <dt class="title" style="padding-top: 2px; font-size: 9pt; width: 150px;">希望曜日・日数</dt>
+      <dd class="content" style="font-size: 9pt;">月・火・水・木・金</dd>
+    </dl>
+    <dl>
+      <dd class="content" style="font-size: 9pt;">5日</dd>
+    </dl>
+  </div>
+  <div class="information-section underline">
+    <dl>
+      <dt class="title" style="padding-top: 2px; font-size: 9pt; width: 150px;">その他条件</dt>
+      <dd class="content" style="font-size: 9pt;">家庭の事情により、リモートワークを希望。</dd>
+    </dl>
+  </div>
+  <!-- 略歴セクション -->
+  <div class="information-section">
+    <dl>
+      <dt class="section condition">略歴</dt>
+    </dl>
+  </div>
+  <div class="information-section underline">
+    <dl>
+      <dt class="title" style="padding-top: 2px; font-size: 9pt; width: 150px;">担当役割・役歴</dt>
+      <dd class="content" style="font-size: 9pt;">PG 02年00ヶ月 PL 02年00ヶ月 PM 02年00ヶ月</dd>
+    </dl>
+  </div>
+  <div class="information-section">
+    <dl>
+      <dd class="content" style="font-size: 5pt;">※PG プログラマー/SE システムエンジニア/SL サブリーダー/PL プロジェクトリーダー/PMO
+        プロジェクトマネジメントオフィス/PM プロジェクトマネージャー/PO プロジェクトオーナー
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<h2 style="text-align: left">スキル</h2>
+<p style="font-size: 7pt">※並行案件があり、期間が重複する場合は、全てを合算した経験年数となります。</p>
+
+<table>
+  <thead>
+  <tr>
+    <th>言語</th>
+    <th>年数</th>
+    <th>フレームワーク</th>
+    <th>年数</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>JavaScript</td>
+    <td>5</td>
+    <td>React</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td>Python</td>
+    <td>4</td>
+    <td>Django</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Python</td>
+    <td>4</td>
+    <td>Django</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Python</td>
+    <td>4</td>
+    <td>Django</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Python</td>
+    <td>4</td>
+    <td>Django</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Python</td>
+    <td>4</td>
+    <td>Django</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Python</td>
+    <td>4</td>
+    <td>Django</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Python</td>
+    <td>4</td>
+    <td>Django</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Python</td>
+    <td>4</td>
+    <td>Django</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Python</td>
+    <td>4</td>
+    <td>Django</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Python</td>
+    <td>4</td>
+    <td>Django</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Python</td>
+    <td>4</td>
+    <td>Django</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Python</td>
+    <td>4</td>
+    <td>Django</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>Python</td>
+    <td>4</td>
+    <td>Django</td>
+    <td>2</td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="table-container">
+  <!-- DBのテーブル -->
+  <table>
+    <thead>
+    <tr>
+      <th>DB</th>
+      <th>年数</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>MySQL</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>PostgreSQL</td>
+      <td>4</td>
+    </tr>
+    <!-- 他の行も同様に追加 -->
+    </tbody>
+  </table>
+
+  <!-- ツールのテーブル -->
+  <table>
+    <thead>
+    <tr>
+      <th>ツール</th>
+      <th>年数</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Visual Studio Code</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>Eclipse</td>
+      <td>2</td>
+    </tr>
+    <!-- 他の行も同様に追加 -->
+    </tbody>
+  </table>
+</div>
+
+<div class="table-container">
+  <!-- DBのテーブル -->
+  <table>
+    <thead>
+    <tr>
+      <th>OS</th>
+      <th>年数</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>MySQL</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>PostgreSQL</td>
+      <td>4</td>
+    </tr>
+    <!-- 他の行も同様に追加 -->
+    </tbody>
+  </table>
+
+  <!-- ツールのテーブル -->
+  <table>
+    <thead>
+    <tr>
+      <th>設計手法</th>
+      <th>年数</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Visual Studio Code</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>Eclipse</td>
+      <td>2</td>
+    </tr>
+    <!-- 他の行も同様に追加 -->
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
