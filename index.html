@@ -28,7 +28,7 @@
           width: 794px; /* 210mm x 3.78 */
           height: 1123px; /* 297mm x 3.78 */
           margin: auto;
-          font-family: "Hiragino Sans";
+          font-family: "HeiseiKakuGo-W5";
       }
 
       @media print {
@@ -104,8 +104,8 @@
       dt.title, dt.section {
           margin-right: 8px;
           flex-shrink: 0;
-          font-size: 7pt;
-          font-weight: bold;
+          font-size: 8pt;
+          font-weight: 300;
           white-space: nowrap;
       }
 
@@ -113,7 +113,7 @@
           border-left: 5px;
           padding-left: 10px;
           font-size: 10pt;
-          font-weight: 400;
+          font-weight: 300;
       }
 
       dt.condition::before {
@@ -126,7 +126,7 @@
           width: 5px;
           height: 100%;
           border-radius: 5px;
-          background: gray;
+          background: #CCCCCC;
       }
 
       dd.content {
@@ -134,11 +134,17 @@
           display: flex;
           font-size: 8pt;
           flex-wrap: wrap; /* Allow content to wrap */
+          font-weight: 300;
       }
 
-      dd.name, dd.age, dd.gender {
+      dd.name {
+          font-size: 12pt;
+          font-weight: 400;
+      }
+
+      dd.age, dd.gender {
           font-size: 10pt;
-          font-weight: 600;
+          font-weight: 400;
       }
 
       dd.age, dt.gender {
@@ -208,7 +214,27 @@
       .table-container th {
           background-color: #f2f2f2;
       }
+      .title-padding {
+          padding-top: 2px;
+      }
 
+      .content-height {
+          height: 60px;
+      }
+
+      .content-margin-left {
+          margin-left: 15px;
+      }
+
+      .title-special {
+          padding-top: 2px;
+          font-size: 9pt;
+          width: 150px;
+      }
+
+      .content-font-size {
+          font-size: 9pt;
+      }
   </style>
 </head>
 <body class="a4">
@@ -256,7 +282,7 @@
   </div>
   <div class="information-section">
     <dl>
-      <dd class="content" style="height: 60px; margin-left: 12px;">自己PRの内容</dd>
+      <dd class="content content-height content-margin-left">自己PRの内容</dd>
     </dl>
   </div>
   <!-- 希望条件セクション -->
@@ -265,28 +291,24 @@
       <dt class="section condition">希望条件</dt>
     </dl>
   </div>
-  <div class="information-section underline">
+  <div class="information-section underline" style="align-items: center">
     <dl>
-      <dt class="title" style="padding-top: 2px; font-size: 9pt; width: 150px;">希望時間</dt>
-      <dd class="content" style="font-size: 9pt;">09:00 - 19:00</dd>
-    </dl>
-    <dl>
-      <dd class="content" style="font-size: 9pt;">内4 - 8時間希望</dd>
+      <dt class="title" style="font-size: 9pt; width: 150px;">希望時間</dt>
+      <dd class="content" style="font-size: 8pt; width: 200px;">09:00 - 19:00</dd>
+      <dd class="content" style="font-size: 8pt;">内4 - 8時間希望</dd>
     </dl>
   </div>
-  <div class="information-section underline">
+  <div class="information-section underline" style="align-items: center">
     <dl>
       <dt class="title" style="padding-top: 2px; font-size: 9pt; width: 150px;">希望曜日・日数</dt>
-      <dd class="content" style="font-size: 9pt;">月・火・水・木・金</dd>
-    </dl>
-    <dl>
-      <dd class="content" style="font-size: 9pt;">5日</dd>
+      <dd class="content" style="font-size: 8pt; width: 200px;">月・火・水・木・金</dd>
+      <dd class="content" style="font-size: 8pt;">5日</dd>
     </dl>
   </div>
-  <div class="information-section underline">
+  <div class="information-section underline" style="align-items: center">
     <dl>
       <dt class="title" style="padding-top: 2px; font-size: 9pt; width: 150px;">その他条件</dt>
-      <dd class="content" style="font-size: 9pt;">家庭の事情により、リモートワークを希望。</dd>
+      <dd class="content" style="font-size: 8pt;">家庭の事情により、リモートワークを希望。</dd>
     </dl>
   </div>
   <!-- 略歴セクション -->
@@ -295,10 +317,10 @@
       <dt class="section condition">略歴</dt>
     </dl>
   </div>
-  <div class="information-section underline">
+  <div class="information-section underline" style="align-items: center">
     <dl>
       <dt class="title" style="padding-top: 2px; font-size: 9pt; width: 150px;">担当役割・役歴</dt>
-      <dd class="content" style="font-size: 9pt;">PG 02年00ヶ月 PL 02年00ヶ月 PM 02年00ヶ月</dd>
+      <dd class="content" style="font-size: 8pt;">PG 02年00ヶ月 PL 02年00ヶ月 PM 02年00ヶ月</dd>
     </dl>
   </div>
   <div class="information-section">
